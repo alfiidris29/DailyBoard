@@ -133,6 +133,7 @@ function renderTugas(filter = filterAktif) {
     li.addEventListener("dragover", (e) => e.preventDefault());
 
     li.addEventListener("drop", (e) => {
+      e.stopPropagation();
       e.preventDefault();
       const originIndex = e.dataTransfer.getData("text/plain");
       const targetIndex = index;
