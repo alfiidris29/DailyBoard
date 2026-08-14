@@ -1,4 +1,4 @@
-import { muatDariStorage , muatCatatanDariStorage } from "./storage.js";
+import { muatDariStorage , muatCatatanDariStorage , simpanKeStorage} from "./storage.js";
 import { ambilCuaca , ambilKutipan } from "./api.js";
 import { editTugas , tambahTugas , hapusTugas ,toggleSelesai } from "./tugas.js";
 import { tambahCatatan , hapusCatatan  } from "./catatan.js";
@@ -6,6 +6,18 @@ import { tambahCatatan , hapusCatatan  } from "./catatan.js";
 // =========================================================================
 // FASE 1: DASAR DOM & EVENT HANDLING (Minggu 1 - 3)
 // =========================================================================
+
+
+// Fungsi Utilitas Debounce
+function debounce(func, delay = 300) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
 
 // MINGGU 1 & 2: Seleksi Root DOM & Pembuatan 3 Section Dinamis
 const app = document.getElementById("app");
@@ -184,12 +196,13 @@ btnSemua.addEventListener("click", () => renderTugas("semua"));
 btnSelesai.addEventListener("click", () => renderTugas("selesai"));
 btnBelum.addEventListener("click", () => renderTugas("belum"));
 
-// MINGGU 14: Event Input Pencarian Real-Time
-inputCari.addEventListener("input", (e) => {
+// MINGGU 14: Event Input Pencarian Real-Time dengan Debounce (300ms)
+const tanganiPencarian = debounce((e) => {
   kataKunciCari = e.target.value;
   renderTugas();
-});
+}, 300);
 
+inputCari.addEventListener("input", tanganiPencarian);
 
 // =========================================================================
 // FASE 3: FITUR CATATAN CEPAT / NOTES (Minggu 8 - 9)
@@ -281,6 +294,16 @@ tombolCariCuaca.addEventListener("click", () => {
     alert("Masukkan nama kota!");
   }
 });
+
+// Fitur Tambahan: Cari cuaca otomatis saat mengetik kota (Delay 500ms)
+const cariCuacaOtomatis = debounce((e) => {
+  const kota = e.target.value.trim();
+  if (kota.length >= 3) {
+    ambilCuaca(kota);
+  }
+}, 500);
+
+inputKota.addEventListener("input", cariCuacaOtomatis);
 
 // MINGGU 12: Promise.all untuk Memuat Seluruh Widget Saat Halaman Dibuka
 async function muatSemuaWidget() {

@@ -32,14 +32,15 @@
  - Klik tombol **Mode Gelap / Mode Terang
 
 ++ struktur file
- DailyBoard/
-├── index.html       
-├── style.css       
-├── README.md
-└── pisah/
-    ├── script.js  
-    ├── storage.js 
-    ├── tugas.js 
-    ├── catatan.js  
-    └── api.js 
+```text
+    DailyBoard/
+        ├── index.html       
+        ├── style.css       
+        ├── README.md
+        └── pisah/
+            ├── script.js  
+            ├── storage.js 
+            ├── tugas.js 
+            ├── catatan.js  
+            └── api.js ```
 
