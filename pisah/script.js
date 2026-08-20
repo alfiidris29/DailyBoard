@@ -3,9 +3,8 @@ import { ambilCuaca , ambilKutipan } from "./api.js";
 import { editTugas , tambahTugas , hapusTugas ,toggleSelesai } from "./tugas.js";
 import { tambahCatatan , hapusCatatan  } from "./catatan.js";
 
-// =========================================================================
+
 // FASE 1: DASAR DOM & EVENT HANDLING (Minggu 1 - 3)
-// =========================================================================
 
 
 // Fungsi Utilitas Debounce
@@ -278,6 +277,7 @@ kutipanArea.id = "kutipan-harian";
 
 // MINGGU 11: Form Input Nama Kota
 const inputKota = document.createElement("input");
+inputKota.type = "text";
 inputKota.placeholder = "Masukkan nama kota...";
 
 const tombolCariCuaca = document.createElement("button");
