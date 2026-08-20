@@ -160,13 +160,14 @@ function renderTugas(filter = filterAktif) {
     });
 
     // MINGGU 9: Klik 2x (dblclick) untuk Edit Tugas
-    spanTeks.addEventListener("dblclick", (e) => {
-      e.stopPropagation();
-      const namaBaru = prompt("Edit Nama Tugas:", tugas.nama);
+  spanTeks.addEventListener("dblclick", (e) => {
+    e.stopPropagation();
+    const namaBaru = prompt("Edit Nama Tugas:", tugas.nama);
       if (namaBaru !== null && validasiInput(namaBaru)) {
-        editTugas(tugas.id, namaBaru.trim());
-      }
-    });
+        daftarTugas = editTugas(daftarTugas, tugas.id, namaBaru.trim()); 
+        renderTugas(); 
+    }
+  });
 
     // MINGGU 5: Tombol Hapus Tugas
     const tombolHapus = document.createElement("button");
