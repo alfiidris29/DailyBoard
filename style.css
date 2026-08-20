@@ -208,11 +208,14 @@ li.dragging {
     border-radius: 8px;
     padding: 10px;
     position: relative;
+    overflow: hidden;
 }
 
 .catatan-item p {
     margin: 0;
     font-size: 0.85rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .catatan-item small {
